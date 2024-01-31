@@ -16,13 +16,11 @@ class TestMainWindow(unittest.TestCase):
         self.window.close()
 
     def test_check_line_edits_empty_fields(self):
-        # Тест проверяет, что при пустых полях устанавливается текст ошибки
         self.window.check_line_edits()
         error_text = self.window.errorLabel.text()
         self.assertEqual(error_text, 'Не все поля заполнены!')
 
     def test_check_line_edits_valid_data(self):
-        # Тест проверяет, что при корректных данных функция выполняется без ошибок
         self.window.fAxisX_Edit.setText('1')
         self.window.tAxisX_Edit.setText('2')
         self.window.sAxisX_Edit.setText('10')
@@ -35,12 +33,10 @@ class TestMainWindow(unittest.TestCase):
             mock_create_plot.assert_called_once_with(1, 2, 10, 3, 4, 10, 'x**2 + y**2')
 
     def test_create_plot_valid_data(self):
-        # Тест проверяет, что create_plot вызывается с корректными данными
         with patch('matplotlib.pyplot.show') as mock_show:
             self.window.create_plot(1, 2, 10, 3, 4, 10, 'x**2 + y**2')
             mock_show.assert_called_once()
 
-    # Добавьте другие тесты по необходимости
 
 if __name__ == '__main__':
     unittest.main()
